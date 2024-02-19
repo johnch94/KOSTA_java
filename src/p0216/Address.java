@@ -25,8 +25,9 @@ public class Address {
     int revNum;
     int delNum;
     String search;
+    boolean set = true;
 
-    while(true) {
+    while(set) {
       //커맨드
       System.out.println("==============================================");
       System.out.println("커맨드를 입력하시오");
@@ -129,6 +130,7 @@ public class Address {
 
         case 6:
           System.out.println("= 종 료 =");
+          set = false;
           break;
 
 
