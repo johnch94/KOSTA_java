@@ -2,6 +2,22 @@ package p0219;
 
 import java.util.Scanner;
 
+class Member{ //VO (Value Object)
+  String name;
+  String tel;
+  String address;
+
+  Member(String name, String tel, String address){
+    this.name = name;
+    this.tel = tel;
+    this.address = address;
+  }
+  void PrintData(){
+    System.out.println("name    : " + name);
+    System.out.println("tel     : " + tel);
+    System.out.println("address : " + address);
+  }
+}
 class Dao{ // DB 데이터 처리 클래스, 배열에 추가, 삭제, 읽기 등을 구현
   Member[] mems = new Member[30];
   int cnt=0;
@@ -23,7 +39,6 @@ class Dao{ // DB 데이터 처리 클래스, 배열에 추가, 삭제, 읽기 �
      }
      return -1;
   }
-
   void delete(int idx){ // 삭제할 방번호 param으로 받아서 한칸씩 앞으로 이동
     for(int i = idx; i<cnt; i++){
       mems[i] = mems[i+1];
@@ -33,7 +48,6 @@ class Dao{ // DB 데이터 처리 클래스, 배열에 추가, 삭제, 읽기 �
 }
 class Services{ // 사용자에게 제공할 기능 구현
   Dao dao = new Dao();
-
   void addMember(Scanner sc){
     System.out.println("=== 추가 ===");
     String name;
@@ -59,6 +73,7 @@ class Services{ // 사용자에게 제공할 기능 구현
       dao.mems[idx].PrintData();
     }
   }
+
   void editMember(Scanner sc){ // 수정
     //수정할 사람 이름 입력받아서 검색
     //검색 결과가 음수 => 수정취소
@@ -94,9 +109,9 @@ class Services{ // 사용자에게 제공할 기능 구현
       dao.mems[i].PrintData();
     }
   }
-
 }
 class Menu{ // menu => controller
+
   Services service = new Services();
 
   void run(Scanner sc){
@@ -133,23 +148,6 @@ class Menu{ // menu => controller
     }
   }
 
-}
-
-class Member{ //VO (Value Object)
-  String name;
-  String tel;
-  String address;
-
-  Member(String name, String tel, String address){
-    this.name = name;
-    this.tel = tel;
-    this.address = address;
-  }
-  void PrintData(){
-    System.out.println("name    : " + name);
-    System.out.println("tel     : " + tel);
-    System.out.println("address : " + address);
-  }
 }
 public class Methotd_Address {
   public static void main(String[] args) {

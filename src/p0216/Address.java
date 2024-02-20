@@ -108,9 +108,7 @@ public class Address {
           System.out.println("= 삭 제 =");
           System.out.print("삭제할 번호 : ");
           for (delNum = sc.nextInt() - 1; delNum < count - 1; delNum++) {
-            man[delNum].name = man[delNum + 1].name;
-            man[delNum].call = man[delNum + 1].call;
-            man[delNum].adr  = man[delNum + 1].adr;
+            man[delNum] = man[delNum + 1];
           }
           count--;
 
