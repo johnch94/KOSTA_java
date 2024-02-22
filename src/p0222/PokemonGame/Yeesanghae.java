@@ -1,6 +1,6 @@
-package p0221.PokemonGame;
+package p0222.PokemonGame;
 
-public class Yeesanghae extends Pokemon{
+public class Yeesanghae extends Pokemon {
   public Yeesanghae(){
     hp = 40;
     lv = 1;
@@ -10,17 +10,17 @@ public class Yeesanghae extends Pokemon{
 
   @Override
   public void Eating(){
-    super.Eating();
+    System.out.println("밥먹기");
     hp += 7;
   }
   @Override
   public void Sleeping(){
-    super.Sleeping();
+    System.out.println("잠자기");
     hp += 7;
   }
   @Override
   public boolean Training(){
-    super.Training();
+    System.out.println("훈련하기");
     hp -= 10;
     if(hp>0){
       exp += 20;
@@ -30,6 +30,7 @@ public class Yeesanghae extends Pokemon{
   }
   @Override
   public boolean Playing(){
+    System.out.println("놀기");
     hp -= 3;
     if(hp>0){
       exp += 5;
@@ -39,6 +40,7 @@ public class Yeesanghae extends Pokemon{
   }
   @Override
   public void lvCheck(){ //이상해씨는 exp 10마다 레벨 1 증가
+    super.lvCheck();
     if(exp>10){
       lv++;
       exp -= 10;

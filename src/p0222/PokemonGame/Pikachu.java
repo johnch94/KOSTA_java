@@ -1,6 +1,6 @@
-package p0221.PokemonGame;
+package p0222.PokemonGame;
 
-public class Pikachu extends Pokemon{
+public class Pikachu extends Pokemon {
   public Pikachu(){
     hp = 30;
     lv = 1;
@@ -10,17 +10,17 @@ public class Pikachu extends Pokemon{
 
   @Override
   public void Eating(){
-    super.Eating();
+    System.out.println("밥먹기");
     hp += 5;
   }
   @Override
   public void Sleeping(){
-    super.Sleeping();
+    System.out.println("잠자기");
     hp += 5;
   }
   @Override
   public boolean Training(){
-    super.Training();
+    System.out.println("훈련하기");
     hp -= 10;
     if(hp>0){
       exp += 15;
@@ -30,6 +30,7 @@ public class Pikachu extends Pokemon{
   }
   @Override
   public boolean Playing(){
+    System.out.println("놀기");
     hp -= 3;
     if(hp>0){
       exp += 3;
@@ -39,6 +40,7 @@ public class Pikachu extends Pokemon{
   }
   @Override
   public void lvCheck(){ //피카츄는 exp 20마다 레벨 1 증가
+    super.lvCheck();
     if(exp>20){
       lv++;
       exp -= 20;

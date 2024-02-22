@@ -1,6 +1,6 @@
-package p0221.PokemonGame;
+package p0222.PokemonGame;
 
-public class Ggobuk extends Pokemon{
+public class Ggobuk extends Pokemon {
   public Ggobuk(){
     hp = 50;
     lv = 1;
@@ -10,17 +10,17 @@ public class Ggobuk extends Pokemon{
 
   @Override
   public void Eating(){
-    super.Eating();
+    System.out.println("밥먹기");
     hp += 10;
   }
   @Override
   public void Sleeping(){
-    super.Sleeping();
+    System.out.println("잠자기");
     hp += 8;
   }
   @Override
   public boolean Training(){
-    super.Training();
+    System.out.println("훈련하기");
     hp -= 10;
     if(hp>0){
       exp += 10;
@@ -30,6 +30,7 @@ public class Ggobuk extends Pokemon{
   }
   @Override
   public boolean Playing(){
+    System.out.println("놀기");
     hp -= 3;
     if(hp>0){
       exp += 1;
@@ -39,6 +40,7 @@ public class Ggobuk extends Pokemon{
   }
   @Override
   public void lvCheck(){ //꼬북이는 exp 50마다 레벨 1 증가
+    super.lvCheck();
     if(exp>50){
       lv++;
       exp -= 50;
