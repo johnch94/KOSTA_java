@@ -5,24 +5,7 @@ import java.util.Scanner;
 
 public class StaffDao {
   private subject[] subs;
-
-  public subject[] getSubs() {
-    return subs;
-  }
-
-  public void setSubs(subject[] subs) {
-    this.subs = subs;
-  }
-
-  private int cnt;
-
-  public int getCnt() {
-    return cnt;
-  }
-
-  public void setCnt(int cnt) {
-    this.cnt = cnt;
-  }
+  private int cnt=0;
 
   public StaffDao(){
     subs = new subject[30];
@@ -88,5 +71,20 @@ public class StaffDao {
    for(int i=0; i<cnt; i++){
      subs[i].toString();
    }
+  }
+
+  public subject[] getSubs() {
+    return subs;
+  }
+  public void setSubs(subject[] subs) {
+    this.subs = subs;
+  }
+
+  public int getCnt() {
+    return cnt;
+  }
+
+  public void setCnt(int cnt) {
+    this.cnt = cnt;
   }
 }
