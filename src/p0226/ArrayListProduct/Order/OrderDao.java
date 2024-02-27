@@ -12,12 +12,12 @@ import java.util.ArrayList;
 public class OrderDao {
   private ArrayList<Order> order;
 
-  OrderDao(){
+  OrderDao() {
     order = new ArrayList<>();
   }
 
   // 주문
-  public void prodOrder(Order o){
+  public void prodOrder(Order o) {
     order.add(o);
   }
 
@@ -27,29 +27,32 @@ public class OrderDao {
   }
 
   // 주문취소 (결제안한것만)
-  public void orderCancle(){
-    for(Order o : order){
-      if(!o.isPay()){
+  public void orderCancle() {
+    for (Order o : order) {
+      if (!o.isPay()) {
         order.remove(o);
       }
     }
   }
 
   // 주문번호로 검색
-  public Order orderSelect(int num){
-    for(Order o : order){
-      if(o.getNum()==num){
-        return o;
+  public ArrayList<Order> orderSelect(int num) {
+    ArrayList<Order> arr = new ArrayList<>();
+    for (Order o : order) {
+      if (o.getNum() == num) {
+        arr.add(o);
       }
     }
-    return -1;
+    return arr;
   }
 
   // 결제
-  public boolean orderPayment(){
-    for(Order o : order){
-      if(!o.isPay()){
-        order.remove(o);
+  public boolean orderPayment() {
+    for (Order o : order) {
+      if (!o.isPay()) {
+
       }
     }
+    return true;
+  }
 }
