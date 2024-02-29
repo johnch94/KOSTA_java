@@ -1,9 +1,10 @@
 package p0223.Member.vo;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Prof extends Person{
-  private String[] myStudent = new String[5];
+  private ArrayList<String> MyStuds = new ArrayList<>(); // 담당 학생 이름
 
   public Prof(){}
 
@@ -14,17 +15,15 @@ public class Prof extends Person{
     this.idName = idName;
     this.personDepart = personDepart;
     this.personType = 2;
-    this.myStudent = myStudent;
   }
 
   // 수정, 검색용 생성자
-  public Prof(String idNum, String pwd, String idName, String personDepart, int personType, String[] myStudent) {
+  public Prof(String idNum, String pwd, String idName, String personDepart, int personType) {
     this.idNum = idNum;
     this.pwd = pwd;
     this.idName = idName;
     this.personDepart = personDepart;
     this.personType = personType;
-    this.myStudent = myStudent;
   }
 
   @Override
@@ -39,11 +38,18 @@ public class Prof extends Person{
         '}';
   }
 
-  public String[] getMyStudent() {
-    return myStudent;
+  public ArrayList<String> getMyStudent() {
+    return MyStuds;
   }
 
-  public void setMyStudent(String[] myStudent) {
-    this.myStudent = myStudent;
+  public void setMyStudent(ArrayList<String> MyStuds) {
+    this.MyStuds = MyStuds;
+  }
+
+  public void addMyStuds(String name){
+    MyStuds.add(name);
+  }
+  public ArrayList<String> getMyStuds(){
+    return MyStuds;
   }
 }

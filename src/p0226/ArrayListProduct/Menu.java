@@ -1,14 +1,18 @@
 package p0226.ArrayListProduct;
 
+import p0226.ArrayListProduct.Order.OrderService;
+import p0226.ArrayListProduct.Product.Product;
 import p0226.ArrayListProduct.Product.ProductService;
 
 import java.util.Scanner;
 
 public class Menu {
   private ProductService pservice;
+  private OrderService oservice;
 
   public Menu(){
     pservice = new ProductService();
+    oservice = new OrderService();
   }
   public void run(Scanner sc){
     boolean flag = true;
@@ -65,12 +69,19 @@ public class Menu {
   }
   public void run_c(Scanner sc){
     boolean flag = true;
+    int prodNum;
+    Product p = null;
     while (flag){
-      System.out.println("1.편의점 메뉴 준비중  2. 편의점  3. 종료");
+      System.out.println("1.주문  2. 주문목록  3. 종료");
       int m = sc.nextInt();
       switch (m){
         case 1:
-
+          System.out.println("=== 주문 ===");
+          pservice.printAll();
+          System.out.print("주문할 제품 번호 : ");
+          prodNum = sc.nextInt();
+          p = pservice.getByName();
+          oservice.addOrder();
           break;
         case 2:
 

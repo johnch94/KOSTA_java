@@ -10,7 +10,7 @@ public class Order {
   private boolean out; // 출고 유무
   private int cnt;
 
-  public Order(){}
+  public Order(int prodNum, int amount, int price, boolean pay){}
 
   // 제품 생성용
   public Order(int prodNum, int amount, int price, int payment, boolean pay) { // pay : 즉시결제 true, 장바구니 false

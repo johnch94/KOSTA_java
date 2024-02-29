@@ -15,11 +15,9 @@ public class ProductDao {
 
   //번호로 검색, 검색된 객체 반환
   public Product select(int num){
+    // indexOf(객체) : 동일한 객체를 찾아서 방번호 리턴
+    // 객체를 비교 하는 방법 : == (참조값 비교) or .equals (값 비교)
     int idx = list.indexOf(new Product(num, "",0,0));
-//    if(idx<0){
-//      return null;
-//    }
-//    return list.get(idx);
     return idx<0 ? null : list.get(idx);
   }
 
@@ -27,9 +25,10 @@ public class ProductDao {
   public ArrayList<Product> selectName(String name){
     ArrayList<Product> li = new ArrayList<>(); // 검색된 객체를 저장할 리스트
     for(Product p : list){
-       if(p.getName().contains(name)){ // String.contains("") : string에 param문자열이 포함되면 true/false
-         li.add(p);
-       }
+      // 제품명에 name 매개변수가 포함되면 true
+      if(p.getName().contains(name)){ // String.contains("") : string에 param문자열이 포함되면 true/false
+        li.add(p);
+      }
     }
     return li;
   }

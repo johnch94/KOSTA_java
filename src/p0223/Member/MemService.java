@@ -7,6 +7,7 @@ import p0223.Member.vo.Student;
 
 import java.util.Scanner;
 
+// member 기능,
 public class MemService {
   // 세션에 저장할 값. 세션 : 연결유지
   public static String LoginId = ""; // 이 값이 비어있으면 logout 상태

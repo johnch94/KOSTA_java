@@ -91,4 +91,9 @@ public class ProductService {
 //    }
     System.out.println( flag ? "삭제 안료":"삭제 취소");
   }
+
+  // 번호로 검색해서 삭제
+  public void delProdNum(int num){
+    dao.delete(num);
+  }
 }
