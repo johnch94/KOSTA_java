@@ -13,13 +13,13 @@ public class BoardDao {
   // insert
   public int insert(Board b){
     Connection conn = db.conn();
-    String sql = "insert into baord values(num,LoginId,sysdate,?,?)";
+    String sql = "insert into baord values(seq1.nextval,?,sysdate,?,?)";
     int cnt = 0;
     try {
       PreparedStatement pstmt = conn.prepareStatement(sql);
-      pstmt.setString(1, b.getContent());
-      pstmt.setString(2, b.getTitle());
-
+      pstmt.setString(1, b.getWriter());
+      pstmt.setString(2, b.getContent());
+      pstmt.setString(3, b.getTitle());
       cnt = pstmt.executeUpdate();
       System.out.println(cnt + " 개 추가됨.");
     } catch (SQLException e) {
@@ -90,7 +90,6 @@ public class BoardDao {
     try {
       PreparedStatement prtmt = conn.prepareStatement(sql);
       prtmt.setInt(1, num);
-
       ResultSet rs = prtmt.executeQuery();
       if(rs.next()) {
         return new Board(rs.getInt(1), rs.getNString(2), rs.getDate(3),
@@ -135,7 +134,7 @@ public class BoardDao {
   // selectByTitle
   public ArrayList<Board> selectByTitle(String title){
     Connection conn = db.conn();
-    String sql = "select * from board where like ?";
+    String sql = "select * from board where title like ? order by num";
     ArrayList<Board> list = new ArrayList<>();
     try {
       PreparedStatement pstmt = conn.prepareCall(sql);
@@ -160,11 +159,11 @@ public class BoardDao {
   // selectByWriter
   public ArrayList<Board> selectByWriter(String writer){
     Connection conn = db.conn();
-    String sql = "select * from board where like ?";
+    String sql = "select * from board where writer = ? order by num";
     ArrayList<Board> list = new ArrayList<>();
     try {
       PreparedStatement pstmt = conn.prepareCall(sql);
-      pstmt.setString(1, "%" + writer +"%");
+      pstmt.setString(1, writer);
       ResultSet rs = pstmt.executeQuery();
       while (rs.next()){
         list.add(new Board(rs.getInt(1), rs.getNString(2), rs.getDate(3),

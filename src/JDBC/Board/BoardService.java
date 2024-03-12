@@ -1,6 +1,7 @@
 package JDBC.Board;
 
 import JDBC.ADDR.Addr;
+import JDBC.mem.MemService;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,8 +17,9 @@ public class BoardService {
     System.out.print("글 제목 :");
     String title = sc.next();
     System.out.println("글 내용 :");
+    sc.nextLine();
     String content = sc.nextLine();
-    dao.insert(new Board(0, "", null, content, title));
+    dao.insert(new Board(0, MemService.LoginId, null, content, title));
     System.out.println(dao.selectByTitle(title));
   }
 
@@ -28,6 +30,20 @@ public class BoardService {
     int num = sc.nextInt();
     if(dao.select(num) != null){
       System.out.println(dao.select(num));
+      if(MemService.LoginId.equals(dao.select(num).getWriter())){ // 로그인 id 와 글쓴이가 같은가
+        System.out.println("1. 수정   2.삭제  3.상세페이지종료");
+        int x = sc.nextInt();
+        switch (x){
+          case 1:
+            editBoard(sc, num);
+            break;
+          case 2:
+            delBoard(sc, num);
+            break;
+          case 3:
+            break;
+        }
+      }
     } else {
       System.out.println("없는 번호");
     }
@@ -38,10 +54,13 @@ public class BoardService {
     System.out.println("=== 제목으로 검색 ===");
     System.out.print("제목 입력 : ");
     String title = sc.next();
-    if(dao.selectByTitle(title) != null){
-      System.out.println(dao.selectByTitle(title));
+    ArrayList<Board> list = dao.selectByTitle(title);
+    if(!list.isEmpty()){
+      for(Board b : list){
+        System.out.println(b);
+      }
     } else {
-      System.out.println("없는 제목");
+      System.out.println("결과 없음");
     }
   }
 
@@ -50,10 +69,13 @@ public class BoardService {
     System.out.println("=== 작성자로 검색 ===");
     System.out.print("작성자 입력 : ");
     String writer = sc.next();
-    if(dao.selectByWriter(writer) != null){
-      System.out.println(dao.selectByWriter(writer));
+    ArrayList<Board> list = dao.selectByWriter(writer);
+    if(!list.isEmpty()){
+      for (Board b : list){
+        System.out.println(b);
+      }
     } else {
-      System.out.println("없는 작성자");
+      System.out.println("결과 없음");
     }
   }
 
@@ -66,36 +88,21 @@ public class BoardService {
     }
   }
 
-  // 수정(글 번호로 찾아서 제목/내용 수정)
-  public void editBoard(Scanner sc){
+  // 수정(글 번호로 찾아서 제목/내용 수정) : 본인것 제외 삭제 못하게 num 필터 필요
+  public void editBoard(Scanner sc, int num){
     System.out.println("=== 수정 ===");
-    System.out.print("수정할 글 번호 : ");
-    int num = sc.nextInt();
-    if(dao.select(num) != null){
-      System.out.print("new title : ");
-      String title = sc.next();
-      System.out.print("new contents : ");
-      sc.nextLine();
-      String content = sc.nextLine();
-
-      dao.update(new Board(num,"", null, content, title ));
-      System.out.println("수정 완료");
-      System.out.println(dao.select(num));
-    } else {
-      System.out.println("없는 번호");
-    }
+    System.out.print("new title : ");
+    sc.nextLine();
+    String title = sc.nextLine();
+    System.out.print("new contents : ");
+    sc.nextLine();
+    String content = sc.nextLine();
+    dao.update(new Board(num,"", null, content, title ));
   }
 
   // 글 번호로 삭제
-  public void delBoard(Scanner sc){
+  public void delBoard(Scanner sc, int num){
     System.out.println("=== 글 삭제 ===");
-    System.out.print("삭제할 번호 : ");
-    int num = sc.nextInt();
-    if(dao.select(num) != null){
-      dao.delete(num);
-      System.out.println("삭제 완료");
-    } else {
-      System.out.println("없는 번호");
-    }
+    dao.delete(num);
   }
 }
